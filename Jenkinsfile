@@ -21,7 +21,7 @@ pipeline {
                         subject: 'Test Stage Successful',
                         body: 'Test stage completed successfully.',
                         attachLog: true,
-                        to: 's223530601@deakin.edu.au'
+                        to: 'mira.hazal@outlook.com'
                     )
                 }
                 failure {
@@ -30,7 +30,7 @@ pipeline {
                         subject: 'Test Stage Failed',
                         body: 'Test stage failed. See the attached logs for details.',
                         attachLog: true,
-                        to: 's223530601@deakin.edu.au'
+                        to: 'mira.hazal@outlook.com'
                     )
                 }
             }
@@ -54,7 +54,7 @@ pipeline {
                         subject: 'Security Scan Stage Successful',
                         body: 'Security Scan stage completed successfully.',
                         attachLog: true,
-                        to: 's223530601@deakin.edu.au'
+                        to: 'mira.hazal@outlook.com'
                     )
                 }
                 failure {
@@ -63,7 +63,7 @@ pipeline {
                         subject: 'Security Scan Stage Failed',
                         body: 'Security Scan stage failed. See the attached logs for details.',
                         attachLog: true,
-                        to: 's223530601@deakin.edu.au'
+                        to: 'mira.hazal@outlook.com'
                     )
                 }
             }
