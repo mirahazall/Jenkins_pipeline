@@ -19,13 +19,15 @@ pipeline {
                     // Send success email notification with logs
                         mail to: 'mira.hazal@outlook.com',
                         subject: 'Test Stage Successful',
-                        body: 'Test stage completed successfully.'
+                        body: 'Test stage completed successfully.',
+                        attachments: [file: currentBuild.rawBuild.getLogFile()]
                 }
                 failure {
                     // Send failure email notification with logs
                         mail to: 'mira.hazal@outlook.com',
                         subject: 'Test Stage Failed',
-                        body: 'Test stage failed. See the attached logs for details.'
+                        body: 'Test stage failed. See the attached logs for details.',
+                        attachments: [file: currentBuild.rawBuild.getLogFile()]
                 }
             }
         }
@@ -45,12 +47,14 @@ pipeline {
                 success {
                         mail to: 'mira.hazal@outlook.com',
                         subject: 'Security Scan Stage Successful',
-                        body: 'Security Scan stage completed successfully.'
+                        body: 'Security Scan stage completed successfully.',
+                        attachments: [file: currentBuild.rawBuild.getLogFile()]
                 }
                 failure {
                         mail to: 'mira.hazal@outlook.com',
                         subject: 'Security Scan Stage Failed',
-                        body: 'Security Scan stage failed. See the attached logs for details.'
+                        body: 'Security Scan stage failed. See the attached logs for details.',
+                        attachments: [file: currentBuild.rawBuild.getLogFile()]
                 }
             }
         }
