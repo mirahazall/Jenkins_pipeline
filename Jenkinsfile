@@ -15,13 +15,24 @@ pipeline {
             }
 
             post {
-                success {
-                    // Send success email notification with logs
-                        mail to: 'mira.hazal@outlook.com',
-                        subject: 'Test Stage Successful',
-                        body: 'Test stage completed successfully.',
-                        attachments: [file: currentBuild.rawBuild.getLogFile()]
-                }
+success {
+    // Send success email notification with logs as attachment
+    def recipient = 'mira.hazal@outlook.com'
+    def subject = 'Test Stage Successful'
+    def body = 'Test stage completed successfully.'
+    def logFile = currentBuild.rawBuild.getLogFile()
+    
+    // Read the log file content
+    def logContent = readFile(logFile)
+    
+    // Define the email body
+    def emailBody = "${body}\n\nBuild Log:\n${logContent}"
+    
+    // Send the email with the log content as attachment
+    mail to: recipient,
+         subject: subject,
+         body: emailBody
+}
                 failure {
                     // Send failure email notification with logs
                         mail to: 'mira.hazal@outlook.com',
