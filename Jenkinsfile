@@ -78,7 +78,7 @@ def sendEmailNotification(stageName) {
     def logFile = currentBuild.rawBuild.getLogFile()
     
     // Read the log file content
-    def logContent = readFile(logFile)
+    def logContent = readFile(logFile.toString())
     
     // Define the email body
     def emailBody = "${body}\n\nBuild Log:\n${logContent}"
