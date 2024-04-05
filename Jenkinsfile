@@ -13,32 +13,16 @@ pipeline {
                 echo "Running unit tests to ensure the code functions as expected using Mocha and Chai"
                 echo "Running integration tests using Sinon.js and MockServer"
             }
-
             post {
-success {
-    // Send success email notification with logs as attachment
-    def recipient = 'mira.hazal@outlook.com'
-    def subject = 'Test Stage Successful'
-    def body = 'Test stage completed successfully.'
-    def logFile = currentBuild.rawBuild.getLogFile()
-    
-    // Read the log file content
-    def logContent = readFile(logFile)
-    
-    // Define the email body
-    def emailBody = "${body}\n\nBuild Log:\n${logContent}"
-    
-    // Send the email with the log content as attachment
-    mail to: recipient,
-         subject: subject,
-         body: emailBody
-}
+                success {
+                    script {
+                        sendEmailNotification('Unit and Integration Tests Successful')
+                    }
+                }
                 failure {
-                    // Send failure email notification with logs
-                        mail to: 'mira.hazal@outlook.com',
-                        subject: 'Test Stage Failed',
-                        body: 'Test stage failed. See the attached logs for details.',
-                        attachments: [file: currentBuild.rawBuild.getLogFile()]
+                    script {
+                        sendEmailNotification('Unit and Integration Tests Failed')
+                    }
                 }
             }
         }
@@ -53,19 +37,16 @@ success {
             steps {
                 echo "Performing security scan using NPM Audit"
             }
-            
             post {
                 success {
-                        mail to: 'mira.hazal@outlook.com',
-                        subject: 'Security Scan Stage Successful',
-                        body: 'Security Scan stage completed successfully.',
-                        attachments: [file: currentBuild.rawBuild.getLogFile()]
+                    script {
+                        sendEmailNotification('Security Scan Successful')
+                    }
                 }
                 failure {
-                        mail to: 'mira.hazal@outlook.com',
-                        subject: 'Security Scan Stage Failed',
-                        body: 'Security Scan stage failed. See the attached logs for details.',
-                        attachments: [file: currentBuild.rawBuild.getLogFile()]
+                    script {
+                        sendEmailNotification('Security Scan Failed')
+                    }
                 }
             }
         }
@@ -88,4 +69,22 @@ success {
             }
         }
     }
+}
+
+def sendEmailNotification(stageName) {
+    def recipient = 'mira.hazal@outlook.com'
+    def subject = "${stageName} Stage"
+    def body = "${stageName} stage completed successfully."
+    def logFile = currentBuild.rawBuild.getLogFile()
+    
+    // Read the log file content
+    def logContent = readFile(logFile)
+    
+    // Define the email body
+    def emailBody = "${body}\n\nBuild Log:\n${logContent}"
+    
+    // Send the email with the log content as attachment
+    mail to: recipient,
+         subject: subject,
+         body: emailBody
 }
