@@ -16,12 +16,12 @@ pipeline {
             post {
                 success {
                     script {
-                        sendEmailNotification('Unit and Integration Tests Successful')
+                        sendEmailNotification('Unit and Integration Tests')
                     }
                 }
                 failure {
                     script {
-                        sendEmailNotification('Unit and Integration Tests Failed')
+                        sendEmailNotification('Unit and Integration Tests')
                     }
                 }
             }
@@ -40,12 +40,12 @@ pipeline {
             post {
                 success {
                     script {
-                        sendEmailNotification('Security Scan Successful')
+                        sendEmailNotification('Security Scan')
                     }
                 }
                 failure {
                     script {
-                        sendEmailNotification('Security Scan Failed')
+                        sendEmailNotification('Security Scan')
                     }
                 }
             }
