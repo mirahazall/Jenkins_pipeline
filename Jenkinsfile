@@ -17,17 +17,17 @@ pipeline {
             post {
                 success {
                     // Send success email notification with logs
-                        mail to: 'mira.hazal@outlook.com'
+                        mail to: 'mira.hazal@outlook.com',
                         subject: 'Test Stage Successful',
                         body: 'Test stage completed successfully.',
-                        attachLog: true,
+                        attachLog: true
                 }
                 failure {
                     // Send failure email notification with logs
-                        mail to: 'mira.hazal@outlook.com'
+                        mail to: 'mira.hazal@outlook.com',
                         subject: 'Test Stage Failed',
                         body: 'Test stage failed. See the attached logs for details.',
-                        attachLog: true,
+                        attachLog: true
                 }
             }
         }
@@ -45,16 +45,16 @@ pipeline {
             
             post {
                 success {
-                        mail to: 'mira.hazal@outlook.com'
+                        mail to: 'mira.hazal@outlook.com',
                         subject: 'Security Scan Stage Successful',
                         body: 'Security Scan stage completed successfully.',
-                        attachLog: true,
+                        attachLog: true
                 }
                 failure {
-                        mail to: 'mira.hazal@outlook.com'
+                        mail to: 'mira.hazal@outlook.com',
                         subject: 'Security Scan Stage Failed',
                         body: 'Security Scan stage failed. See the attached logs for details.',
-                        attachLog: true,    
+                        attachLog: true 
                 }
             }
         }
